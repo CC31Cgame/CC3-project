@@ -1,0 +1,355 @@
+package better.proj;
+// for cc8 game. please let me finish this.
+import java.awt.event.ActionEvent;
+import javax.swing.JButton;
+import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.JFrame;
+import java.awt.Graphics;
+import javax.swing.JLabel;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
+
+
+public class BetterProj {
+
+    public static void main(String[] args) {
+        MyFrame mf = new MyFrame();
+        mf.setVisible(true);
+    }
+}
+
+class MyFrame extends JFrame implements ActionListener{
+    
+    public int starting_arc1 = 360, end_arc1 = 360;
+    public int starting_arc2 = 360, end_arc2 = 360;
+    public int hp1=360, hp2=360, atk1=10, atk2=10, def1=2, def2=2;
+    
+    
+    //JLabels
+    JLabel label = new JLabel("Player 1");
+    JLabel label2 = new JLabel("Player 2");
+    
+    //JButtons
+    JButton atk_button1 = new JButton("Attack");
+    JButton atk_button2 = new JButton("Attack");
+    JButton atk_boost1 = new JButton("Damage + 5");
+    JButton atk_boost2 = new JButton("Damage + 5");
+    JButton def_boost1 = new JButton("Defense + 3");
+    JButton def_boost2 = new JButton("Defense + 3");
+    JButton restart = new JButton("Restart Game");
+    
+    //TextField
+    JTextField text = new JTextField();
+    JTextField player1_hp = new JTextField("Health : "+hp1);
+    JTextField player2_hp = new JTextField("Health : "+hp2);
+    JTextField player1_atk = new JTextField("Attack : "+atk1);
+    JTextField player2_atk = new JTextField("Attack : "+atk2);
+    JTextField player1_def = new JTextField("Defense : "+def1);
+    JTextField player2_def = new JTextField("Defense : "+def2);
+    
+    //Font
+    Font font = new Font("Georgia", Font.ITALIC+Font.BOLD, 20);
+    Font font2 = new Font("Georgia", Font.ITALIC+Font.BOLD, 15);
+    
+    //Border
+    Border thickBorder = new LineBorder(Color.red, 3);
+    Border thickBorder2 = new LineBorder(Color.blue, 3);
+    Border thickBorder3 = new LineBorder(Color.blue, 3);
+    Border thickBorder4 = new LineBorder(Color.cyan, 3);
+
+    
+    MyFrame(){
+        super("RPG game");
+        super.setSize(485, 600);
+        super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        super.setResizable(false);
+        super.setLayout(null);
+        super.getContentPane().setBackground(Color.black);
+        
+        //setBorder
+        atk_button1.setBorder(thickBorder);
+        atk_button2.setBorder(thickBorder);
+        atk_boost1.setBorder(thickBorder2);
+        atk_boost2.setBorder(thickBorder2);
+        def_boost1.setBorder(thickBorder3);
+        def_boost2.setBorder(thickBorder3);
+        restart.setBorder(thickBorder4);
+        
+
+        //setsize
+        label.setSize(250, 150);
+        label2.setSize(225, 150);
+        player1_hp.setSize(170,30);
+        player2_hp.setSize(170,30);
+        player1_atk.setSize(170,30);
+        player2_atk.setSize(170,30);
+        player1_def.setSize(170,30);
+        player2_def.setSize(170,30);
+        atk_button1.setSize(170,50);
+        atk_button2.setSize(170,50);
+        def_boost1.setSize(170,50);
+        def_boost2.setSize(170,50);
+        atk_boost1.setSize(170,50);
+        atk_boost2.setSize(170,50);
+        text.setSize(390, 40);
+        restart.setSize(390, 40);
+        
+        //Font
+        label.setFont(font);
+        label2.setFont(font);
+        player1_hp.setFont(font2);
+        player2_hp.setFont(font2);
+        player1_atk.setFont(font2);
+        player2_atk.setFont(font2);
+        player1_def.setFont(font2);
+        player2_def.setFont(font2);
+        atk_button1.setFont(font);
+        atk_button2.setFont(font);
+        atk_boost1.setFont(font);
+        atk_boost2.setFont(font);
+        def_boost1.setFont(font);
+        def_boost2.setFont(font);
+        text.setFont(font2);
+        restart.setFont(font);
+        
+        //color of fonts
+        label.setForeground(Color.white);
+        label2.setForeground(Color.white);
+        player1_hp.setForeground(Color.black);
+        player2_hp.setForeground(Color.black);
+        player1_atk.setForeground(Color.black);
+        player2_atk.setForeground(Color.black);
+        player1_def.setForeground(Color.black);
+        player2_def.setForeground(Color.black);
+        atk_button1.setForeground(Color.black);
+        atk_button2.setForeground(Color.black);
+        atk_boost1.setForeground(Color.black);
+        atk_boost2.setForeground(Color.black);
+        def_boost1.setForeground(Color.black);
+        def_boost2.setForeground(Color.black);
+        text.setForeground(Color.black);
+        restart.setForeground(Color.black);
+        
+        //placements
+        label.setLocation(75, -40);
+        label2.setLocation(312, -40);
+        player1_hp.setLocation(25, 175);
+        player2_hp.setLocation(275, 175);
+        player1_atk.setLocation(25, 205);
+        player2_atk.setLocation(275, 205);
+        player1_def.setLocation(25, 235);
+        player2_def.setLocation(275, 235);
+        atk_button1.setLocation(25, 275);
+        atk_button2.setLocation(275, 275);
+        atk_boost1.setLocation(25, 325);
+        atk_boost2.setLocation(275, 325);
+        def_boost1.setLocation(25, 375);
+        def_boost2.setLocation(275, 375);
+        text.setLocation(40, 450);
+        restart.setLocation(40, 500);
+        
+        //ActionListener
+        text.addActionListener(this);
+        atk_button1.addActionListener(this);
+        atk_button2.addActionListener(this);
+        atk_boost1.addActionListener(this);
+        atk_boost2.addActionListener(this);
+        def_boost1.addActionListener(this);
+        def_boost2.addActionListener(this);
+        restart.addActionListener(this);
+        
+        
+        //print
+        super.add(label);
+        super.add(label2);
+        super.add(player1_hp);
+        super.add(player2_hp);
+        super.add(player1_atk);
+        super.add(player2_atk);
+        super.add(player1_def);
+        super.add(player2_def);
+        super.add(atk_button1);
+        super.add(atk_button2);
+        super.add(atk_boost1);
+        super.add(atk_boost2);
+        super.add(def_boost1);
+        super.add(def_boost2);
+        super.add(text);
+        super.add(restart);
+        
+    }
+    
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        g.setColor(Color.blue);
+        g.fillArc(75, 85, 100, 100, starting_arc1, end_arc1);
+        g.setColor(Color.red);
+        g.fillArc(310, 85, 100, 100, starting_arc2, end_arc2);
+    }
+
+    
+    @Override
+    public void actionPerformed(ActionEvent e) { 
+        
+        if (e.getSource() == atk_button1) {
+            atk_button1.setEnabled(true);
+            atk_button2.setEnabled(true);
+            atk_boost1.setEnabled(true);
+            atk_boost2.setEnabled(true);
+            def_boost1.setEnabled(true);
+            def_boost2.setEnabled(true);
+            text.setText("");
+            text.setText(text.getText().concat("Player 1 attacked player 2 for "+atk1+" Damage"));
+            hp2 = hp2-(atk1-def2);
+            if(hp2 < 0){
+                hp2 = 0;
+            }
+            player2_hp.setText("");
+            player2_hp.setText("Health : "+hp2);
+            atk_button1.setEnabled(false);
+            atk_boost1.setEnabled(false);
+            def_boost1.setEnabled(false);
+            end_arc2 = hp2;
+            repaint();
+        }
+        if (e.getSource() == atk_button2) {
+            atk_button1.setEnabled(true);
+            atk_button2.setEnabled(true);
+            atk_boost1.setEnabled(true);
+            atk_boost2.setEnabled(true);
+            def_boost1.setEnabled(true);
+            def_boost2.setEnabled(true);
+            text.setText("");
+            text.setText(text.getText().concat("Player 2 attacked player 1 for "+atk2+" Damage"));
+            hp1 = hp1-(atk2-def1);
+            if(hp1 < 0){
+                hp1 = 0;
+            }
+            player1_hp.setText("");
+            player1_hp.setText("Health : "+hp1);
+            atk_button2.setEnabled(false);
+            atk_boost2.setEnabled(false);
+            def_boost2.setEnabled(false);
+            end_arc1 = hp1;
+            repaint();
+        }
+        if (e.getSource() == atk_boost1) {
+            atk_button1.setEnabled(true);
+            atk_button2.setEnabled(true);
+            atk_boost1.setEnabled(true);
+            atk_boost2.setEnabled(true);
+            def_boost1.setEnabled(true);
+            def_boost2.setEnabled(true);
+            text.setText("");
+            text.setText(text.getText().concat("Player 1 Damage raised by 5"));
+            atk1 = atk1+5;
+            player1_atk.setText("");
+            player1_atk.setText("Attack : "+atk1);
+            atk_button1.setEnabled(false);
+            atk_boost1.setEnabled(false);
+            def_boost1.setEnabled(false);
+        }
+        if (e.getSource() == atk_boost2) {
+            atk_button1.setEnabled(true);
+            atk_button2.setEnabled(true);
+            atk_boost1.setEnabled(true);
+            atk_boost2.setEnabled(true);
+            def_boost1.setEnabled(true);
+            def_boost2.setEnabled(true);
+            text.setText("");
+            text.setText(text.getText().concat("Player 2 Damage raised by 5"));
+            atk2 = atk2+5;
+            player2_atk.setText("");
+            player2_atk.setText("Attack : "+atk2);
+            atk_button2.setEnabled(false);
+            atk_boost2.setEnabled(false);
+            def_boost2.setEnabled(false);
+        }
+        if (e.getSource() == def_boost1) {
+            atk_button1.setEnabled(true);
+            atk_button2.setEnabled(true);
+            atk_boost1.setEnabled(true);
+            atk_boost2.setEnabled(true);
+            def_boost1.setEnabled(true);
+            def_boost2.setEnabled(true);
+            text.setText("");
+            text.setText(text.getText().concat("Player 1 Defense raised by 3"));
+            def1 = def1+3;
+            player1_def.setText("");
+            player1_def.setText("Defense : "+def1);
+            atk_button1.setEnabled(false);
+            atk_boost1.setEnabled(false);
+            def_boost1.setEnabled(false);
+        }
+        if (e.getSource() == def_boost2) {
+            atk_button1.setEnabled(true);
+            atk_button2.setEnabled(true);
+            atk_boost1.setEnabled(true);
+            atk_boost2.setEnabled(true);
+            def_boost1.setEnabled(true);
+            def_boost2.setEnabled(true);
+            text.setText("");
+            text.setText(text.getText().concat("Player 2 Defense raised by 3"));
+            def2 = def2+3;
+            player2_def.setText("");
+            player2_def.setText("Defense : "+def2);
+            atk_button2.setEnabled(false);
+            atk_boost2.setEnabled(false);
+            def_boost2.setEnabled(false);
+        }
+        if(hp1 <= 0){
+            text.setText("");
+            text.setText("Player 2 Wins!");
+            atk_button1.setEnabled(false);
+            atk_boost1.setEnabled(false);
+            def_boost1.setEnabled(false);
+            atk_button2.setEnabled(false);
+            atk_boost2.setEnabled(false);
+            def_boost2.setEnabled(false);
+        }
+        if(hp2 <= 0){
+            text.setText("");
+            text.setText("Player 1 Wins!");
+            atk_button1.setEnabled(false);
+            atk_boost1.setEnabled(false);
+            def_boost1.setEnabled(false);
+            atk_button2.setEnabled(false);
+            atk_boost2.setEnabled(false);
+            def_boost2.setEnabled(false);
+        }
+        if (e.getSource() == restart) {
+            text.setText("");
+            hp1 = 360;
+            hp2 = 360;
+            atk1 = 10;
+            atk2 = 10;
+            def1 = 2;
+            def2 = 2;
+            end_arc1 = 360;
+            end_arc2 = 360;
+            player1_hp.setText("");
+            player1_hp.setText("Health : "+hp1);
+            player2_hp.setText("");
+            player2_hp.setText("Health : "+hp1);
+            player1_atk.setText("");
+            player1_atk.setText("Attack : "+atk1);
+            player2_atk.setText("");
+            player2_atk.setText("Attack : "+atk2);
+            player1_def.setText("");
+            player1_def.setText("Defense : "+def1);
+            player2_def.setText("");
+            player2_def.setText("Defense : "+def2);
+            atk_button1.setEnabled(true);
+            atk_button2.setEnabled(true);
+            atk_boost1.setEnabled(true);
+            atk_boost2.setEnabled(true);
+            def_boost1.setEnabled(true);
+            def_boost2.setEnabled(true);
+            repaint();
+        }
+    }
+}
